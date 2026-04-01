@@ -41,10 +41,10 @@ let convictMode1 = false;
 
 function getLevel1Buttons() {
   return {
-    begin: { x: width / 2, y: height * 0.75, w: 220, h: 52 },
-    convict: { x: width / 2, y: height * 0.9, w: 230, h: 54 },
-    back: { x: width * 0.11, y: height * 0.11, w: 120, h: 46 },
-    magnify: { x: width / 2, y: height * 0.88, w: 230, h: 54 },
+    begin: { x: width / 2, y: height * 0.82, w: 220, h: 52 },
+    convict: { x: width / 2, y: height * 0.9, w: 220, h: 40 },
+    back: { x: width * 0.14, y: height * 0.12, w: 120, h: 46 },
+    magnify: { x: width / 2, y: height * 0.82, w: 220, h: 50 },
   };
 }
 
@@ -65,7 +65,14 @@ function drawLevel1Portrait(x, y, index, drawW, drawH) {
   const hovered = isMouseOverLevel1Suspect(x, y, drawW, drawH);
   const scale = hovered ? 1.04 : 1;
 
-  drawPortraitFrame(x, y, drawW * scale, drawH * 0.97 * scale, hovered, convictMode1);
+  drawPortraitFrame(
+    x,
+    y,
+    drawW * scale,
+    drawH * 0.97 * scale,
+    hovered,
+    convictMode1,
+  );
 
   push();
   imageMode(CENTER);
@@ -123,7 +130,13 @@ function drawLevel1Lineup() {
   );
 
   drawLineupFloor();
-  drawInfoPill("Visual clue case", width / 2, height * 0.2, 190, UI_COLORS.warning);
+  drawInfoPill(
+    "Visual clue case",
+    width / 2,
+    height * 0.2,
+    190,
+    UI_COLORS.warning,
+  );
 
   for (let i = 0; i < suspects1.length; i++) {
     drawLevel1Portrait(positions[i].x, positions[i].y, i, imgW, imgH);
@@ -143,7 +156,11 @@ function drawLevel1Lineup() {
     );
   }
 
-  drawButton(buttons.convict, convictMode1 ? "Cancel Convict" : "Convict", convictMode1 ? UI_COLORS.danger : UI_COLORS.accentStrong);
+  drawButton(
+    buttons.convict,
+    convictMode1 ? "Cancel Convict" : "Convict",
+    convictMode1 ? UI_COLORS.danger : UI_COLORS.accentStrong,
+  );
 }
 
 function drawLevel1Inspect() {
@@ -174,7 +191,8 @@ function drawLevel1Inspect() {
       },
       {
         label: "Magnify",
-        value: magnifyMessage1 || "Use Magnify to inspect the suspect more closely.",
+        value:
+          magnifyMessage1 || "Use Magnify to inspect the suspect more closely.",
         h: 90,
       },
     ],

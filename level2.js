@@ -59,14 +59,16 @@ let showBoard2 = false;
 let questioned2 = [false, false, false, false];
 
 function getLevel2Buttons() {
-  const lineupRow = getButtonRow(2, height * 0.89, 180, 54, 28);
-  const inspectRow = getButtonRow(2, height * 0.89, 180, 54, 28);
+  const lineupRow = getButtonRow(2, height * 0.92, 170, 50, 28);
+  const inspectRow = getButtonRow(2, height * 0.86, 170, 50, 28);
 
   return {
-    begin: { x: width / 2, y: height * 0.75, w: 220, h: 52 },
+    begin: { x: width / 2, y: height * 0.82, w: 220, h: 52 },
+
     board: lineupRow[0],
     convict: lineupRow[1],
-    back: { x: width * 0.11, y: height * 0.11, w: 120, h: 46 },
+
+    back: { x: width * 0.12, y: height * 0.12, w: 110, h: 44 },
     magnify: inspectRow[0],
     ask: inspectRow[1],
   };
@@ -85,7 +87,14 @@ function drawLevel2Portrait(x, y, index, drawW, drawH) {
   const hovered = isMouseOverLevel2Suspect(x, y, drawW, drawH);
   const scale = hovered ? 1.04 : 1;
 
-  drawPortraitFrame(x, y, drawW * scale, drawH * 0.97 * scale, hovered, convictMode2);
+  drawPortraitFrame(
+    x,
+    y,
+    drawW * scale,
+    drawH * 0.97 * scale,
+    hovered,
+    convictMode2,
+  );
 
   push();
   imageMode(CENTER);
@@ -203,7 +212,9 @@ function drawLevel2Inspect() {
         h: 80,
       },
       {
-        label: questioned2[selected2] ? "Recorded statement" : "Question suspect",
+        label: questioned2[selected2]
+          ? "Recorded statement"
+          : "Question suspect",
         value:
           askMessage2 ||
           "Ask this suspect a question to add their statement to the board.",
@@ -215,7 +226,11 @@ function drawLevel2Inspect() {
 
   drawButton(buttons.back, "Back", [83, 103, 139]);
   drawButton(buttons.magnify, "Magnify", UI_COLORS.warning);
-  drawButton(buttons.ask, questioned2[selected2] ? "Asked" : "Ask", UI_COLORS.accentStrong);
+  drawButton(
+    buttons.ask,
+    questioned2[selected2] ? "Asked" : "Ask",
+    UI_COLORS.accentStrong,
+  );
 }
 
 function drawLevel2Board() {
@@ -224,7 +239,13 @@ function drawLevel2Board() {
   const panelW = min(width * 0.8, 820);
   const panelH = min(height * 0.74, 500);
   drawGlassPanel(width / 2, height / 2, panelW, panelH, UI_COLORS.accent, 26);
-  drawBadge("EVIDENCE BOARD", width / 2, height / 2 - panelH * 0.37, 155, UI_COLORS.accent);
+  drawBadge(
+    "EVIDENCE BOARD",
+    width / 2,
+    height / 2 - panelH * 0.37,
+    155,
+    UI_COLORS.accent,
+  );
 
   push();
   textAlign(LEFT, TOP);

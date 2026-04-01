@@ -77,15 +77,17 @@ let forensicMessage3 = "";
 let questioned3 = [false, false, false, false, false];
 
 function getLevel3Buttons() {
-  const lineupRow = getButtonRow(3, height * 0.89, 160, 54, 20);
-  const inspectRow = getButtonRow(3, height * 0.89, 160, 54, 20);
+  const lineupRow = getButtonRow(3, height * 0.9, 150, 50, 22);
+  const inspectRow = getButtonRow(3, height * 0.86, 150, 50, 22);
 
   return {
-    begin: { x: width / 2, y: height * 0.75, w: 220, h: 52 },
+    begin: { x: width / 2, y: height * 0.82, w: 220, h: 52 },
+
     board: lineupRow[0],
     forensics: lineupRow[1],
     convict: lineupRow[2],
-    back: { x: width * 0.11, y: height * 0.11, w: 120, h: 46 },
+
+    back: { x: width * 0.12, y: height * 0.12, w: 110, h: 44 },
     magnify: inspectRow[0],
     ask: inspectRow[1],
     notebook: inspectRow[2],
@@ -105,7 +107,14 @@ function drawLevel3Portrait(x, y, index, drawW, drawH) {
   const hovered = isMouseOverLevel3Suspect(x, y, drawW, drawH);
   const scale = hovered ? 1.04 : 1;
 
-  drawPortraitFrame(x, y, drawW * scale, drawH * 0.97 * scale, hovered, convictMode3);
+  drawPortraitFrame(
+    x,
+    y,
+    drawW * scale,
+    drawH * 0.97 * scale,
+    hovered,
+    convictMode3,
+  );
 
   push();
   imageMode(CENTER);
@@ -176,7 +185,9 @@ function drawLevel3Inspect() {
         h: 78,
       },
       {
-        label: questioned3[selected3] ? "Recorded interview" : "Interview suspect",
+        label: questioned3[selected3]
+          ? "Recorded interview"
+          : "Interview suspect",
         value:
           askMessage3 ||
           "Interview this suspect to add their timeline to the evidence board.",
@@ -188,7 +199,11 @@ function drawLevel3Inspect() {
 
   drawButton(buttons.back, "Back", [83, 103, 139]);
   drawButton(buttons.magnify, "Magnify", UI_COLORS.warning);
-  drawButton(buttons.ask, questioned3[selected3] ? "Asked" : "Interview", UI_COLORS.accentStrong);
+  drawButton(
+    buttons.ask,
+    questioned3[selected3] ? "Asked" : "Interview",
+    UI_COLORS.accentStrong,
+  );
   drawButton(buttons.notebook, "Notebook", UI_COLORS.success);
 }
 
@@ -206,7 +221,13 @@ function drawLevel3Lineup() {
   );
 
   drawLineupFloor();
-  drawInfoPill(`Forensics left: ${forensicsLeft3}`, width / 2, height * 0.2, 220, UI_COLORS.success);
+  drawInfoPill(
+    `Forensics left: ${forensicsLeft3}`,
+    width / 2,
+    height * 0.2,
+    220,
+    UI_COLORS.success,
+  );
 
   for (let i = 0; i < suspects3.length; i++) {
     drawLevel3Portrait(positions[i].x, positions[i].y, i, imgW, imgH);
@@ -241,7 +262,13 @@ function drawNotebook3() {
   const panelW = min(width * 0.72, 700);
   const panelH = min(height * 0.52, 380);
   drawGlassPanel(width / 2, height / 2, panelW, panelH, UI_COLORS.warning, 26);
-  drawBadge("NOTEBOOK", width / 2, height / 2 - panelH * 0.33, 120, UI_COLORS.warning);
+  drawBadge(
+    "NOTEBOOK",
+    width / 2,
+    height / 2 - panelH * 0.33,
+    120,
+    UI_COLORS.warning,
+  );
 
   push();
   textAlign(LEFT, TOP);
@@ -272,7 +299,13 @@ function drawForensicsPanel3() {
   const panelW = min(width * 0.74, 720);
   const panelH = min(height * 0.46, 320);
   drawGlassPanel(width / 2, height / 2, panelW, panelH, UI_COLORS.success, 26);
-  drawBadge("FORENSICS", width / 2, height / 2 - panelH * 0.3, 130, UI_COLORS.success);
+  drawBadge(
+    "FORENSICS",
+    width / 2,
+    height / 2 - panelH * 0.3,
+    130,
+    UI_COLORS.success,
+  );
 
   push();
   textAlign(LEFT, TOP);
@@ -303,7 +336,13 @@ function drawBoard3() {
   const panelW = min(width * 0.82, 860);
   const panelH = min(height * 0.78, 560);
   drawGlassPanel(width / 2, height / 2, panelW, panelH, UI_COLORS.accent, 26);
-  drawBadge("EVIDENCE BOARD", width / 2, height / 2 - panelH * 0.39, 155, UI_COLORS.accent);
+  drawBadge(
+    "EVIDENCE BOARD",
+    width / 2,
+    height / 2 - panelH * 0.39,
+    155,
+    UI_COLORS.accent,
+  );
 
   push();
   textAlign(LEFT, TOP);
